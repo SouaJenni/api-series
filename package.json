@@ -1,11 +1,11 @@
 {
   "name": "api-series",
   "version": "1.0.0",
-  "type": "module",
-  "main": "index.js",
+  "type": "commonjs",
+  "main": "src/server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "node --env-file=.env index.js"
+    "dev": "node --env-file=.env src/server.js"
   },
   "keywords": [],
   "author": "Jennifer",
@@ -15,6 +15,7 @@
   "dependencies": {
     "cors": "^2.8.5",
     "express": "^5.1.0",
+    "mongodb": "^6.16.0",
     "mongoose": "^8.15.1",
     "morgan": "^1.10.0"
   }
