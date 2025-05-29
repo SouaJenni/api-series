@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-const FilmeSchema = new mongoose.Schema({
+const SerieSchema = new mongoose.Schema({
     titulo: {
         type: String,
         required: true,
@@ -10,26 +10,21 @@ const FilmeSchema = new mongoose.Schema({
         type: Number,
         required: true,
         min: 0,
-        max: 10
+        max: 5
     },
     comentario: {
-        type: String,
-        required: true
+        type: String
     },
     capa: {
-        type: String, // URL da imagem
-        default: ''
+        type: String
     },
-    resumo: {
+    idImdb: {
         type: String,
-        default: ''
-    },
-    notaImdb: {
-        type: String, // Pode vir como string da API externa (ex: "8.1")
-        default: ''
+        index: true,
+        unique: true
     }
 }, {
-    timestamps: true // Cria automaticamente createdAt e updatedAt
+    timestamps: true
 });
 
-module.exports = mongoose.model('Filme', FilmeSchema);
+module.exports = mongoose.model('Series', SerieSchema);
