@@ -5,12 +5,10 @@ const routes = require('./routes/index.js');
 
 const app = express();
 
-// Middlewares
 app.use(cors());
 app.use(express.json());
 app.use(morgan('dev'));
 
-// Usando o arquivo central de rotas
 app.use(routes);
 
 module.exports = app;

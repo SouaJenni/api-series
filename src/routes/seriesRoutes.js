@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const filmeController = require('../controllers/filmeController');
+const seriesController = require('../controllers/seriesController');
 
 // CRUD de filmes comentados pelo usuário
 router.get('/', ()=>{
