@@ -1,6 +1,6 @@
 // src/services/filmeService.js
 const Filme = require('../models/filmeModel');
-const imdbClient = require('../utils/imdbClient');
+const imdbClient = require('../utils/imdbClient.js');
 
 module.exports = {
 // Listar todos os filmes comentados

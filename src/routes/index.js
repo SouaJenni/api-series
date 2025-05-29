@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 
-const filmeRoutes = require('./seriesRoutes');
+const filmeRoutes = require('./seriesRoutes.js');
 
 // Todas as rotas da aplicação
 router.use('/series', seriesRoutes);
