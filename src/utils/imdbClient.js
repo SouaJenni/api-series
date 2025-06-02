@@ -1,6 +1,6 @@
 const axios = require('axios');
 
-const API_KEY = 'sua_chave_aqui';
+const API_KEY = process.env.KEY;
 const BASE_URL = 'http://www.omdbapi.com/';
 
 const imdbClient = {
@@ -29,7 +29,14 @@ const imdbClient = {
                     plot: 'full'
                 }
             });
-            return response.data;
+            const data = response.data;
+
+            return {
+                title: data.Title,
+                plot: data.Plot,
+                rating: data.imdbRating,
+                poster: data.Poster
+            };
         } catch (error) {
             console.error('Erro ao buscar detalhes da série:', error.message);
             throw error;
