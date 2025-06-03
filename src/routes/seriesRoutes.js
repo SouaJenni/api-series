@@ -12,6 +12,6 @@ router.get('/', ()=>{
 // router.delete('/:id', filmeController.deletarFilme); // Remover comentário
 //
 // // Autocomplete de sugestões (busca externa, ex: OMDb ou TMDb)
-// router.get('/sugestoes/busca', filmeController.buscarSugestoes); // Ex: ?q=batman
+router.get('/sugestoes/busca', seriesController.buscarSugestoes); // Ex: ?q=batman
 
 module.exports = router;
