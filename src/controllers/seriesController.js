@@ -26,12 +26,12 @@ module.exports = {
     },
 
 // POST /filmes
-    async criarFilme(req, res) {
+    async salvarSerie(req, res) {
         try {
-            const novoFilme = await serieService.criarFilme(req.body);
-            res.status(201).json(novoFilme);
+            const novaSerie = await serieService.criarSerie(req.body);
+            res.status(201).json(novaSerie);
         } catch (err) {
-            res.status(400).json({error: 'Erro ao criar filme', detail: err.message});
+            res.status(400).json({error: 'Erro ao criar serie', detail: err.message});
         }
     },
 

@@ -9,7 +9,13 @@ const SerieSchema = new mongoose.Schema({
     notaUsuario: {
         type: Number,
         required: true,
-        min: 0,
+        min: 1,
+        max: 5
+    },
+    notaImdb: {
+        type: Number,
+        required: true,
+        min: 1,
         max: 5
     },
     comentario: {
@@ -17,6 +23,11 @@ const SerieSchema = new mongoose.Schema({
     },
     capa: {
         type: String
+    },
+    tipo: {
+        type: String,
+        required: true,
+        enum: ["serie", "filme"]
     },
     idImdb: {
         type: String,
