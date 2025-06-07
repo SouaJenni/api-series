@@ -35,17 +35,34 @@ module.exports = {
         }
     },
 
-// PUT /filmes/:id
-    async atualizarFilme(req, res) {
+// PUT /series/:id
+    async atualizarSerie(req, res) {
         try {
-            const {id} = req.params;
-            const atualizado = await serieService.atualizarFilme(id, req.body);
-            if (!atualizado) {
-                return res.status(404).json({error: 'Filme não encontrado para atualizar'});
+            const { id } = req.params;
+
+            if (!id.match(/^[0-9a-fA-F]{24}$/)) {
+                return res.status(400).json({ error: 'ID inválido' });
             }
-            res.status(200).json(atualizado);
+
+            const { notaUsuario, comentario } = req.body;
+
+            if (notaUsuario === undefined && comentario === undefined) {
+                return res.status(400).json({ error: 'É necessário fornecer ao menos "nota" ou "comentario" para atualizar.'});
+            }
+
+            const dadosAtualizar = {};
+            if (notaUsuario !== undefined) dadosAtualizar.notaUsuario = notaUsuario;
+            if (comentario !== undefined) dadosAtualizar.comentario = comentario;
+
+            const atualizado = await serieService.atualizarSerie(id, dadosAtualizar);
+
+            if (!atualizado) {
+                return res.status(404).json({ error: 'Série não encontrada para atualizar.'});
+            }
+
+            return res.status(200).json(atualizado);
         } catch (err) {
-            res.status(400).json({error: 'Erro ao atualizar filme', detail: err.message});
+            return res.status(400).json({ error: 'Erro ao atualizar série.', detail: err.message});
         }
     },
 

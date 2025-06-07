@@ -25,7 +25,7 @@ module.exports = {
         return await serie.save();
     },
 
-    async atualizarFilme(id, data) {
+    async atualizarSerie(id, data) {
         return await Series.findByIdAndUpdate(id, data, { new: true });
     },
 

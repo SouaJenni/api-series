@@ -8,7 +8,7 @@ router.get('/', ()=>{
 }); // Listar todos os filmes
 // router.get('/:id', filmeController.getFilmePorId); // Buscar filme por ID
 router.post('/', seriesController.salvarSerie); // Criar novo comentário de filme
-// router.put('/:id', filmeController.atualizarFilme); // Atualizar comentário
+router.put('/:id', seriesController.atualizarSerie); // Atualizar comentário e nota do usuário
 // router.delete('/:id', filmeController.deletarFilme); // Remover comentário
 //
 // // Autocomplete de sugestões (busca externa, ex: OMDb ou TMDb)
