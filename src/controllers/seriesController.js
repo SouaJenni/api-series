@@ -11,7 +11,7 @@ module.exports = {
         }
     },
 
-// GET /filmes/:id
+    // GET /filmes/:id
     async getFilmePorId(req, res) {
         try {
             const {id} = req.params;
@@ -25,7 +25,7 @@ module.exports = {
         }
     },
 
-// POST /filmes
+    // POST /filmes
     async salvarSerie(req, res) {
         try {
             const novaSerie = await serieService.criarSerie(req.body);
@@ -35,7 +35,7 @@ module.exports = {
         }
     },
 
-// PUT /series/:id
+    // PUT /series/:id
     async atualizarSerie(req, res) {
         try {
             const { id } = req.params;
@@ -66,7 +66,7 @@ module.exports = {
         }
     },
 
-// DELETE /filmes/:id
+    // DELETE /filmes/:id
     async deletarFilme(req, res) {
         try {
             const {id} = req.params;
@@ -80,7 +80,7 @@ module.exports = {
         }
     },
 
-// GET /filmes/sugestoes/busca?q=nome
+    // GET /filmes/sugestoes/busca?q=nome
     async buscarSugestoes(req, res) {
         try {
             const {q} = req.query;
@@ -91,4 +91,4 @@ module.exports = {
             res.status(500).json({error: 'Erro ao buscar sugestões', detail: err.message});
         }
     }
-}
+};

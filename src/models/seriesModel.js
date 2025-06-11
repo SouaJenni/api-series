@@ -27,7 +27,7 @@ const SerieSchema = new mongoose.Schema({
     tipo: {
         type: String,
         required: true,
-        enum: ["serie", "filme"]
+        enum: ['serie', 'filme']
     },
     idImdb: {
         type: String,

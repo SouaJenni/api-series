@@ -8,12 +8,12 @@ module.exports = {
         return await Series.find().sort({ createdAt: -1 }); // mais recentes primeiro
     },
 
-// Buscar um filme por ID
+    // Buscar um filme por ID
     async buscarFilmePorId(id) {
         return await Series.findById(id);
     },
 
-// Criar novo filme com comentário do usuário
+    // Criar novo filme com comentário do usuário
     async criarSerie(data) {
         const {titulo, notaUsuario, idImdb, notaImdb, tipo} = data;
         if (!titulo || !notaUsuario || !idImdb || !notaImdb || !tipo) {
@@ -29,12 +29,12 @@ module.exports = {
         return await Series.findByIdAndUpdate(id, data, { new: true });
     },
 
-// Deletar um filme/comentário
+    // Deletar um filme/comentário
     async deletarFilme(id) {
         return await Series.findByIdAndDelete(id);
     },
 
-// Buscar sugestões por nome de filme via API externa
+    // Buscar sugestões por nome de filme via API externa
     async buscarSugestoesExternas(query) {
         const resultados = await imdbClient.buscarSugestoes(query);
         return resultados;

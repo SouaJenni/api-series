@@ -1,4 +1,4 @@
-const _ = require("lodash");
+const _ = require('lodash');
 const API_KEY = process.env.TMDB_KEY;
 const BASE_URL_FILMES = 'https://api.themoviedb.org/3/search/movie?include_adult=false&page=1';
 const BASE_URL_SERIES = 'https://api.themoviedb.org/3/search/tv?include_adult=false&page=1';
@@ -16,7 +16,7 @@ const imdbClient = {
                 headers: {
                     Authorization: API_KEY
                 }
-            }
+            };
             const urlFilmes = `${BASE_URL_FILMES}&query=${encodeURIComponent(query)}`;
             const responseFilmes = await fetch(urlFilmes, params);
             const dataFilmes = await responseFilmes.json();
@@ -30,8 +30,8 @@ const imdbClient = {
             const nomeFilmes = _.map(dataFilmes.results, filme => ({
                 titulo: filme.title,
                 popularidade: filme.popularity,
-                ano: _.first(filme.release_date.split("-")),
-                tipo: "filme",
+                ano: _.first(filme.release_date.split('-')),
+                tipo: 'filme',
                 nota: normalizarNota(filme.vote_average),
                 capa: `${IMAGE_URL}${filme.poster_path}`,
                 id: filme.id
@@ -39,14 +39,14 @@ const imdbClient = {
             const nomeSeries = _.map(dataSeries.results, serie => ({
                 titulo: serie.name,
                 popularidade: serie.popularity,
-                ano: _.first(serie.first_air_date.split("-")),
-                tipo: "serie",
+                ano: _.first(serie.first_air_date.split('-')),
+                tipo: 'serie',
                 nota: normalizarNota(serie.vote_average),
                 capa: `${IMAGE_URL}${serie.poster_path}`,
                 id: serie.id
             }));
 
-            return _.sortBy([...nomeFilmes, ...nomeSeries], "popularidade").reverse().slice(0, 10);
+            return _.sortBy([...nomeFilmes, ...nomeSeries], 'popularidade').reverse().slice(0, 10);
         } catch (error) {
             console.error('Erro ao buscar série:', error.message);
             throw error;
