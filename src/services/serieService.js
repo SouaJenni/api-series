@@ -26,7 +26,21 @@ module.exports = {
     },
 
     async atualizarSerie(id, data) {
-        return await Series.findByIdAndUpdate(id, data, { new: true });
+        if (!id.match(/^[0-9a-fA-F]{24}$/)) {
+            throw new Error ('ID inválido');
+        }
+
+        const { notaUsuario, comentario } = data;
+
+        if (notaUsuario === undefined && comentario === undefined) {
+            throw new Error ('É necessário fornecer ao menos "nota" ou "comentario" para atualizar.');
+        }
+
+        const dadosAtualizar = {};
+        if (notaUsuario !== undefined) dadosAtualizar.notaUsuario = notaUsuario;
+        if (comentario !== undefined) dadosAtualizar.comentario = comentario;
+
+        return await Series.findByIdAndUpdate(id, dadosAtualizar, { new: true });
     },
 
     // Deletar um filme/comentário

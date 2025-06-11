@@ -39,27 +39,13 @@ module.exports = {
     async atualizarSerie(req, res) {
         try {
             const { id } = req.params;
+            const dados = req.body;
 
-            if (!id.match(/^[0-9a-fA-F]{24}$/)) {
-                return res.status(400).json({ error: 'ID inválido' });
-            }
-
-            const { notaUsuario, comentario } = req.body;
-
-            if (notaUsuario === undefined && comentario === undefined) {
-                return res.status(400).json({ error: 'É necessário fornecer ao menos "nota" ou "comentario" para atualizar.'});
-            }
-
-            const dadosAtualizar = {};
-            if (notaUsuario !== undefined) dadosAtualizar.notaUsuario = notaUsuario;
-            if (comentario !== undefined) dadosAtualizar.comentario = comentario;
-
-            const atualizado = await serieService.atualizarSerie(id, dadosAtualizar);
+            const atualizado = await serieService.atualizarSerie(id, dados);
 
             if (!atualizado) {
                 return res.status(404).json({ error: 'Série não encontrada para atualizar.'});
             }
-
             return res.status(200).json(atualizado);
         } catch (err) {
             return res.status(400).json({ error: 'Erro ao atualizar série.', detail: err.message});
