@@ -30,7 +30,7 @@ const imdbClient = {
             const nomeFilmes = _.map(dataFilmes.results, filme => ({
                 titulo: filme.title,
                 popularidade: filme.popularity,
-                ano: _.first(filme.release_date.split('-')),
+                ano: new Date(filme.release_date).getFullYear(),
                 tipo: 'filme',
                 nota: normalizarNota(filme.vote_average),
                 capa: `${IMAGE_URL}${filme.poster_path}`,
@@ -39,7 +39,7 @@ const imdbClient = {
             const nomeSeries = _.map(dataSeries.results, serie => ({
                 titulo: serie.name,
                 popularidade: serie.popularity,
-                ano: _.first(serie.first_air_date.split('-')),
+                ano: new Date(serie.first_air_date).getFullYear(),
                 tipo: 'serie',
                 nota: normalizarNota(serie.vote_average),
                 capa: `${IMAGE_URL}${serie.poster_path}`,
