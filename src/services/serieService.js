@@ -1,19 +1,20 @@
-// src/services/filmeService.js
+const {response} = require('express');
+
 const SerieModel = require('../models/seriesModel');
 const imdbClient = require('../utils/imdbClient.js');
 
 module.exports = {
-// Listar todos os filmes comentados
-    async listarFilmes() {
-        return SerieModel.find().sort({ createdAt: -1 }); // mais recentes primeiro
+    async listarSeries() {
+        return SerieModel.find().sort({ createdAt: -1 });
     },
 
-    // Buscar um filme por ID
-    async buscarFilmePorId(id) {
+    async buscarSeriePorId(id) {
+        if (!id.match(/^[0-9a-fA-F]{24}$/)) {
+            throw new Error ('ID inválido');
+        }
         return SerieModel.findById(id);
     },
 
-    // Criar novo filme com comentário do usuário
     async criarSerie(data) {
         const {titulo, notaUsuario, idImdb, notaImdb, tipo} = data;
         if (!titulo || !notaUsuario || !idImdb || !notaImdb || !tipo) {
@@ -43,12 +44,14 @@ module.exports = {
         return SerieModel.findByIdAndUpdate(id, dadosAtualizar, { new: true });
     },
 
-    // Deletar um filme/comentário
-    async deletarFilme(id) {
+    async deletarSerie(id) {
+        if (!id.match(/^[0-9a-fA-F]{24}$/)) {
+            throw new Error ('ID inválido');
+        }
+
         return SerieModel.findByIdAndDelete(id);
     },
 
-    // Buscar sugestões por nome de filme via API externa
     async buscarSugestoesExternas(query) {
         const resultados = await imdbClient.buscarSugestoes(query);
         return resultados;

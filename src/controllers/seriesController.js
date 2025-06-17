@@ -1,31 +1,28 @@
 const serieService = require('../services/serieService');
 
 module.exports = {
-// GET /filmes
-    async getTodosFilmes(req, res) {
+    async listarSeries(req, res) {
         try {
-            const filmes = await serieService.listarFilmes();
-            res.status(200).json(filmes);
+            const series = await serieService.listarSeries();
+            res.status(200).json(series);
         } catch (err) {
-            res.status(500).json({error: 'Erro ao buscar filmes', detail: err.message});
+            res.status(500).json({error: 'Erro ao buscar séries', detail: err.message});
         }
     },
 
-    // GET /filmes/:id
-    async getFilmePorId(req, res) {
+    async buscarSeriePorId(req, res) {
         try {
             const {id} = req.params;
-            const filme = await serieService.buscarFilmePorId(id);
-            if (!filme) {
-                return res.status(404).json({error: 'Filme não encontrado'});
+            const serie = await serieService.buscarSeriePorId(id);
+            if (!serie) {
+                return res.status(404).json({error: 'Série não encontrado'});
             }
-            res.status(200).json(filme);
+            res.status(200).json(serie);
         } catch (err) {
-            res.status(500).json({error: 'Erro ao buscar filme', detail: err.message});
+            res.status(500).json({error: 'Erro ao buscar série', detail: err.message});
         }
     },
 
-    // POST /filmes
     async salvarSerie(req, res) {
         try {
             const novaSerie = await serieService.criarSerie(req.body);
@@ -35,7 +32,6 @@ module.exports = {
         }
     },
 
-    // PUT /series/:id
     async atualizarSerie(req, res) {
         try {
             const { id } = req.params;
@@ -52,17 +48,16 @@ module.exports = {
         }
     },
 
-    // DELETE /filmes/:id
-    async deletarFilme(req, res) {
+    async deletarSerie(req, res) {
         try {
             const {id} = req.params;
-            const removido = await serieService.deletarFilme(id);
+            const removido = await serieService.deletarSerie(id);
             if (!removido) {
-                return res.status(404).json({error: 'Filme não encontrado para deletar'});
+                return res.status(404).json({error: 'Série não encontrado para deletar'});
             }
-            res.status(204).send(); // Sem conteúdo
+            res.status(204).send();
         } catch (err) {
-            res.status(500).json({error: 'Erro ao deletar filme', detail: err.message});
+            res.status(500).json({error: 'Erro ao deletar série', detail: err.message});
         }
     },
 

@@ -1,17 +1,14 @@
 const express = require('express');
 const router = express.Router();
+
 const seriesController = require('../controllers/seriesController');
 
-// CRUD de filmes comentados pelo usuário
-router.get('/', ()=>{
-    console.log('getGetchado');
-}); // Listar todos os filmes
-// router.get('/:id', filmeController.getFilmePorId); // Buscar filme por ID
-router.post('/', seriesController.salvarSerie); // Criar novo comentário de filme
-router.put('/:id', seriesController.atualizarSerie); // Atualizar comentário e nota do usuário
-// router.delete('/:id', filmeController.deletarFilme); // Remover comentário
-//
-// // Autocomplete de sugestões (busca externa, ex: OMDb ou TMDb)
-router.get('/sugestoes/busca', seriesController.buscarSugestoes); // Ex: ?q=batman
+router.get('/', seriesController.listarSeries);
+router.get('/:id', seriesController.buscarSeriePorId);
+router.post('/', seriesController.salvarSerie);
+router.put('/:id', seriesController.atualizarSerie);
+router.delete('/:id', seriesController.deletarSerie);
+
+router.get('/sugestoes/busca', seriesController.buscarSugestoes);
 
 module.exports = router;
