@@ -15,7 +15,7 @@ module.exports = {
             const {id} = req.params;
             const serie = await serieService.buscarSeriePorId(id);
             if (!serie) {
-                return res.status(404).json({error: 'Série não encontrado'});
+                return res.status(404).json({error: 'Série não encontrada'});
             }
             res.status(200).json(serie);
         } catch (err) {
@@ -61,7 +61,6 @@ module.exports = {
         }
     },
 
-    // GET /filmes/sugestoes/busca?q=nome
     async buscarSugestoes(req, res) {
         try {
             const {q} = req.query;

@@ -1,7 +1,11 @@
-const {response} = require('express');
-
 const SerieModel = require('../models/seriesModel');
-const imdbClient = require('../utils/imdbClient.js');
+const imdbClient = require('../utils/tmdbClient.js');
+
+function validarId(id) {
+    if (!id.match(/^[0-9a-fA-F]{24}$/)) {
+        throw new Error('ID inválido');
+    }
+}
 
 module.exports = {
     async listarSeries() {
@@ -9,9 +13,7 @@ module.exports = {
     },
 
     async buscarSeriePorId(id) {
-        if (!id.match(/^[0-9a-fA-F]{24}$/)) {
-            throw new Error ('ID inválido');
-        }
+        validarId(id);
         return SerieModel.findById(id);
     },
 
@@ -27,9 +29,7 @@ module.exports = {
     },
 
     async atualizarSerie(id, data) {
-        if (!id.match(/^[0-9a-fA-F]{24}$/)) {
-            throw new Error ('ID inválido');
-        }
+        validarId(id);
 
         const { notaUsuario, comentario } = data;
 
@@ -45,9 +45,7 @@ module.exports = {
     },
 
     async deletarSerie(id) {
-        if (!id.match(/^[0-9a-fA-F]{24}$/)) {
-            throw new Error ('ID inválido');
-        }
+        validarId(id);
 
         return SerieModel.findByIdAndDelete(id);
     },

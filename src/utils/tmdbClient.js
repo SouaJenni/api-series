@@ -6,10 +6,11 @@ const BASE_URL_SERIES = 'https://api.themoviedb.org/3/search/tv?include_adult=fa
 const IMAGE_URL = 'https://image.tmdb.org/t/p/w600_and_h900_bestv2';
 
 function normalizarNota(nota) {
+    if (!nota || nota === -1) return 0;
     return (nota - 1) * (4 / 9) + 1;
 }
 
-const imdbClient = {
+const tmdbClient = {
     async buscarSugestoes(query) {
         try {
             const params = {
@@ -53,22 +54,6 @@ const imdbClient = {
         }
     },
 
-    async getSeriesById(imdbID) {
-        try {
-            const url = `${BASE_URL}?apikey=${API_KEY}&i=${imdbID}&plot=full`;
-            const response = await fetch(url);
-            const data = await response.json();
-
-            return {
-                title: data.Title,
-                summary: data.Plot,
-                cover: data.Poster
-            };
-        } catch (error) {
-            console.error('Erro ao buscar detalhes da série:', error.message);
-            throw error;
-        }
-    }
 };
 
-module.exports = imdbClient;
+module.exports = tmdbClient;
