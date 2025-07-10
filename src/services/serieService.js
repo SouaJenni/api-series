@@ -1,5 +1,5 @@
 const SerieModel = require('../models/seriesModel');
-const imdbClient = require('../utils/tmdbClient.js');
+const imdbClient = require('../utils/imdbClient');
 
 function validarId(id) {
     if (!id.match(/^[0-9a-fA-F]{24}$/)) {
@@ -21,6 +21,12 @@ module.exports = {
         const {titulo, notaUsuario, idImdb, notaImdb, tipo} = data;
         if (!titulo || !notaUsuario || !idImdb || !notaImdb || !tipo) {
             throw new Error('Título, nota e informações da série são obrigatórios.');
+        }
+
+        const serieExistente = await SerieModel.findOne({ idImdb });
+
+        if (serieExistente) {
+            throw new Error('Esta série já foi cadastrada.');
         }
 
         const serie = new SerieModel(data);
@@ -52,6 +58,9 @@ module.exports = {
 
     async buscarSugestoesExternas(query) {
         const resultados = await imdbClient.buscarSugestoes(query);
+        if (!resultados || resultados.length === 0) {
+            throw new Error('Nenhum resultado encontrado para a busca.');
+        }
         return resultados;
     }
 };

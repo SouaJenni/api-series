@@ -10,7 +10,7 @@ function normalizarNota(nota) {
     return (nota - 1) * (4 / 9) + 1;
 }
 
-const tmdbClient = {
+const imdbClient = {
     async buscarSugestoes(query) {
         try {
             const params = {
@@ -56,4 +56,4 @@ const tmdbClient = {
 
 };
 
-module.exports = tmdbClient;
+module.exports = imdbClient;

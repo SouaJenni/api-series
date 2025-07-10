@@ -31,6 +31,7 @@ const SerieSchema = new mongoose.Schema({
     },
     idImdb: {
         type: String,
+        required: true,
         index: true,
         unique: true
     }
