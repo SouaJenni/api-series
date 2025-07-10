@@ -9,12 +9,12 @@ function validarId(id) {
 
 module.exports = {
     async listarSeries() {
-        return SerieModel.find().sort({ createdAt: -1 });
+        return SerieModel.find({ deletado: false }).sort({ createdAt: -1 });
     },
 
     async buscarSeriePorId(id) {
         validarId(id);
-        return SerieModel.findById(id);
+        return SerieModel.findById({ id, deletado: false });
     },
 
     async criarSerie(data) {
@@ -23,7 +23,7 @@ module.exports = {
             throw new Error('Título, nota e informações da série são obrigatórios.');
         }
 
-        const serieExistente = await SerieModel.findOne({ idImdb });
+        const serieExistente = await SerieModel.findOne({ idImdb, deletado: false });
 
         if (serieExistente) {
             throw new Error('Esta série já foi cadastrada.');
@@ -47,13 +47,13 @@ module.exports = {
         if (notaUsuario !== undefined) dadosAtualizar.notaUsuario = notaUsuario;
         if (comentario !== undefined) dadosAtualizar.comentario = comentario;
 
-        return SerieModel.findByIdAndUpdate(id, dadosAtualizar, { new: true });
+        return SerieModel.findByIdAndUpdate({ id, deletado: false }, dadosAtualizar, { new: true });
     },
 
     async deletarSerie(id) {
         validarId(id);
 
-        return SerieModel.findByIdAndDelete(id);
+        return SerieModel.findByIdAndUpdate(id, { deletado: true }, { new: true });
     },
 
     async buscarSugestoesExternas(query) {

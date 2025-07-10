@@ -1,8 +1,9 @@
 const _ = require('lodash');
+
 const API_KEY = process.env.TMDB_KEY;
+
 const BASE_URL_FILMES = 'https://api.themoviedb.org/3/search/movie?include_adult=false&page=1';
 const BASE_URL_SERIES = 'https://api.themoviedb.org/3/search/tv?include_adult=false&page=1';
-
 const IMAGE_URL = 'https://image.tmdb.org/t/p/w600_and_h900_bestv2';
 
 function normalizarNota(nota) {

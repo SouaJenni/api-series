@@ -34,6 +34,10 @@ const SerieSchema = new mongoose.Schema({
         required: true,
         index: true,
         unique: true
+    },
+    deletado: {
+        type: Boolean,
+        default: false
     }
 }, {
     timestamps: true
