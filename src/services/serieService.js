@@ -7,6 +7,39 @@ function validarId(id) {
     }
 }
 
+function validarNotas(notaImdb, notaUsuario) {
+    if(notaImdb < 0 || notaImdb > 5) {
+        throw new Error('Nota IMDB deve ser um número entre 0 e 5');
+    }
+    if(notaUsuario < 0 || notaUsuario > 5) {
+        throw new Error('A nota deve ser um número entre 0 e 5');
+    }
+}
+
+function validarSerie(data) {
+    const { titulo, notaUsuario, idImdb, notaImdb, tipo } = data;
+
+    if (typeof titulo !== 'string' || !titulo.trim()) {
+        throw new Error('Título é obrigatório e deve ser uma string.');
+    }
+
+    if (typeof notaUsuario !== 'number') {
+        throw new Error('Nota do usuário é obrigatória e deve ser um número.');
+    }
+
+    if (typeof idImdb != 'string' || !idImdb.trim()) {
+        throw new Error('ID do IMDb é obrigatório.');
+    }
+
+    if (typeof notaImdb !== 'number') {
+        throw new Error('Nota do IMDb é obrigatória e deve ser um número.');
+    }
+
+    if (typeof tipo !== 'string' || !['filme', 'serie'].includes(tipo)) {
+        throw new Error('Tipo é obrigatório e deve ser "filme" ou "serie".');
+    }
+}
+
 module.exports = {
     async listarSeries() {
         return SerieModel.find({ deletado: false }).sort({ createdAt: -1 });
@@ -22,6 +55,9 @@ module.exports = {
         if (!titulo || !notaUsuario || !idImdb || !notaImdb || !tipo) {
             throw new Error('Título, nota e informações da série são obrigatórios.');
         }
+
+        validarSerie(data);
+        validarNotas(notaImdb, notaUsuario);
 
         const serieExistente = await SerieModel.findOne({ idImdb, deletado: false });
 
