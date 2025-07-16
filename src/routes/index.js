@@ -1,7 +1,8 @@
 const express = require('express');
-const router = express.Router();
 
 const seriesRoutes = require('./seriesRoutes.js');
+
+const router = express.Router();
 
 router.use('/series', seriesRoutes);
 

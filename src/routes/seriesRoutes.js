@@ -1,7 +1,8 @@
 const express = require('express');
-const router = express.Router();
 
 const seriesController = require('../controllers/seriesController');
+
+const router = express.Router();
 
 router.get('/sugestoes/busca', seriesController.buscarSugestoes);
 

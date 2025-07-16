@@ -48,7 +48,7 @@ const imdbClient = {
                 id: serie.id
             }));
 
-            return _.sortBy([...nomeFilmes, ...nomeSeries], 'popularidade').reverse().slice(0, 10);
+            return _.sortBy([...nomeFilmes, ...nomeSeries], 'popularidade').reverse().slice(0, 6);
         } catch (error) {
             console.error('Erro ao buscar série:', error.message);
             throw error;
