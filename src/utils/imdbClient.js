@@ -34,18 +34,18 @@ const imdbClient = {
                 popularidade: filme.popularity,
                 ano: new Date(filme.release_date).getFullYear(),
                 tipo: 'filme',
-                nota: normalizarNota(filme.vote_average),
+                notaImdb: normalizarNota(filme.vote_average),
                 capa: `${IMAGE_URL}${filme.poster_path}`,
-                id: filme.id
+                idImdb: filme.id
             }));
             const nomeSeries = _.map(dataSeries.results, serie => ({
                 titulo: serie.name,
                 popularidade: serie.popularity,
                 ano: new Date(serie.first_air_date).getFullYear(),
                 tipo: 'serie',
-                nota: normalizarNota(serie.vote_average),
+                notaImdb: normalizarNota(serie.vote_average),
                 capa: `${IMAGE_URL}${serie.poster_path}`,
-                id: serie.id
+                idImdb: serie.id
             }));
 
             return _.sortBy([...nomeFilmes, ...nomeSeries], 'popularidade').reverse().slice(0, 6);
