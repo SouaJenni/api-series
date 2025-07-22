@@ -36,7 +36,7 @@ const imdbClient = {
                 tipo: 'filme',
                 notaImdb: normalizarNota(filme.vote_average),
                 capa: `${IMAGE_URL}${filme.poster_path}`,
-                idImdb: filme.id
+                idImdb: filme.id.toString()
             }));
             const nomeSeries = _.map(dataSeries.results, serie => ({
                 titulo: serie.name,
@@ -45,7 +45,7 @@ const imdbClient = {
                 tipo: 'serie',
                 notaImdb: normalizarNota(serie.vote_average),
                 capa: `${IMAGE_URL}${serie.poster_path}`,
-                idImdb: serie.id
+                idImdb: serie.id.toString()
             }));
 
             return _.sortBy([...nomeFilmes, ...nomeSeries], 'popularidade').reverse().slice(0, 6);
