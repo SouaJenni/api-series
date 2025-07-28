@@ -3,7 +3,8 @@ const serieService = require('../services/serieService');
 module.exports = {
     async listarSeries(req, res) {
         try {
-            const series = await serieService.listarSeries();
+            const query = req.query;
+            const series = await serieService.listarSeries(query);
             res.status(200).json(series);
         } catch (err) {
             console.error('Séries não encontradas para listar.');

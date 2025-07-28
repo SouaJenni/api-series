@@ -41,8 +41,14 @@ function validarSerie(data) {
 }
 
 module.exports = {
-    async listarSeries() {
-        return SerieModel.find({ deletado: false }).sort({ createdAt: -1 });
+    async listarSeries(query) {
+        const page = parseInt(query.page) || 1;
+        const limit = parseInt(query.limit) || 5;
+
+        return SerieModel.find({ deletado: false })
+            .sort({ createdAt: -1 })
+            .skip((page - 1) * limit)
+            .limit(Number(limit));
     },
 
     async buscarSeriePorId(id) {
