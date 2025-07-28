@@ -8,7 +8,8 @@ const IMAGE_URL = 'https://image.tmdb.org/t/p/w600_and_h900_bestv2';
 
 function normalizarNota(nota) {
     if (!nota || nota === -1) return 0;
-    return (nota - 1) * (4 / 9) + 1;
+    const resultado = (nota - 1) * (4 / 9) + 1;
+    return Math.round(resultado * 100) / 100;
 }
 
 const imdbClient = {
@@ -47,7 +48,6 @@ const imdbClient = {
                 capa: `${IMAGE_URL}${serie.poster_path}`,
                 idImdb: serie.id.toString()
             }));
-
             return _.sortBy([...nomeFilmes, ...nomeSeries], 'popularidade').reverse().slice(0, 6);
         } catch (error) {
             console.error('Erro ao buscar série:', error.message);
