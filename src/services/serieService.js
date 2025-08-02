@@ -48,12 +48,12 @@ module.exports = {
         return SerieModel.find({ deletado: false })
             .sort({ createdAt: -1 })
             .skip((page - 1) * limit)
-            .limit(Number(limit));
+            .limit(limit);
     },
 
     async buscarSeriePorId(id) {
         validarId(id);
-        return SerieModel.findById({ id, deletado: false });
+        return SerieModel.findOne({ _id: id, deletado: false });
     },
 
     async criarSerie(data) {
