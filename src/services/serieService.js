@@ -89,13 +89,13 @@ module.exports = {
         if (notaUsuario !== undefined) dadosAtualizar.notaUsuario = notaUsuario;
         if (comentario !== undefined) dadosAtualizar.comentario = comentario;
 
-        return SerieModel.findByIdAndUpdate({ id, deletado: false }, dadosAtualizar, { new: true });
+        return SerieModel.findByIdAndUpdate({ _id: id, deletado: false }, dadosAtualizar, { new: true });
     },
 
-    async deletarSerie(id) {
-        validarId(id);
+    async deletarSerie(_id) {
+        validarId(_id);
 
-        return SerieModel.findByIdAndUpdate(id, { deletado: true }, { new: true });
+        return SerieModel.findByIdAndUpdate(_id, { deletado: true }, { new: true });
     },
 
     async buscarSugestoesExternas(query) {
