@@ -4,8 +4,8 @@ module.exports = {
     async listarSeries(req, res) {
         try {
             const query = req.query;
-            const series = await serieService.listarSeries(query);
-            res.status(200).json(series);
+            const {series, totalSeries} = await serieService.listarSeries(query);
+            res.setHeader('total-series', totalSeries).status(200).json(series);
         } catch (err) {
             console.error('Séries não encontradas para listar.');
             res.status(500).json({error: 'Erro ao buscar séries', detail: err.message});
