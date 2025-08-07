@@ -35,6 +35,7 @@ const imdbClient = {
                 popularidade: filme.popularity,
                 ano: new Date(filme.release_date).getFullYear(),
                 tipo: 'filme',
+                resumo: filme.overview,
                 notaImdb: normalizarNota(filme.vote_average),
                 capa: `${IMAGE_URL}${filme.poster_path}`,
                 idImdb: filme.id.toString()
@@ -44,6 +45,7 @@ const imdbClient = {
                 popularidade: serie.popularity,
                 ano: new Date(serie.first_air_date).getFullYear(),
                 tipo: 'serie',
+                resumo: serie.overview,
                 notaImdb: normalizarNota(serie.vote_average),
                 capa: `${IMAGE_URL}${serie.poster_path}`,
                 idImdb: serie.id.toString()

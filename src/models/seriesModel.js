@@ -18,6 +18,9 @@ const SerieSchema = new mongoose.Schema({
         min: 1,
         max: 5
     },
+    resumo: {
+        type: String
+    },
     comentario: {
         type: String
     },
